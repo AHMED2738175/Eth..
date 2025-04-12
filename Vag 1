@@ -1,0 +1,36 @@
+// SendEther.sol
+// عقد بسيط لإرسال واستقبال ETH
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SendEther {
+    event Received(address indexed sender, uint amount);
+    event Sent(address indexed receiver, uint amount);
+
+    // استلام الإيثر
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
+    }
+
+    // إرسال الإيثر
+    function send(address payable _to) public payable {
+        require(msg.value > 0, "Send some ETH");
+        _to.transfer(msg.value);
+        emit Sent(_to, msg.value);
+    }
+}
+# dApp لإرسال واستقبال ETH
+
+هذا تطبيق لامركزي بسيط يستخدم Ethereum لإرسال واستقبال ETH عبر العقد الذكي باستخدام Solidity وواجهة HTML + JavaScript.
+
+## كيفية التشغيل:
+
+1. قم بتثبيت الحزم:
+   ```bash
+   npm install
+npx hardhat run scripts/deploy.js --network localhost
+python -m http.server 8000
+---
+
+هل ترغب في أي مساعدة إضافية في أي من الخطوات؟
